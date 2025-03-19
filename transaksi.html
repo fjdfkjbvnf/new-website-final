@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Transaksi - Kopi Order</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body background="background.png">
+     <header>
+        <h1>Form Pemesanan Kopi</h1>
+        <nav>
+            <ul>
+               <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+		<li><a href="Review.html">Review</a></li>
+                <li><a href="produk.html">Produk</a></li>
+                <li><a href="transaksi.html">Payment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+	<center><h2>Formulir Pemesanan</h2></center>
+    </center>
+	<br>
+	<center>
+        <form id="orderForm">
+            <label for="name">Nama Pemesan:</label>
+            <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
+
+            <label for="food">Pilih produk:</label>
+            <select id="food" name="food" required>
+                <option value="">-- Pilih Minuman --</option>
+                <option value="Sukocano">Sukocano-35000</option>
+                <option value="Sidikalang latte">Sidikalang latte-30000</option>
+                <option value="Authentic Arabica">Authentic Arabica-35000</option>
+                <option value="Vanilla Latte">Vanilla latte-30000</option>
+            </select>
+
+            <label for="quantity">Jumlah:</label>
+            <input type="number" id="quantity" name="quantity" min="1" placeholder="Masukkan jumlah" required>
+
+	<button type="button" onclick="calculateTotal()">Order</button>
+        </form>
+
+
+        <div class="summary" id="summary" style="display: none;">
+            <h3>Ringkasan Pesanan</h3>
+            <p><strong>Nama:</strong> <span id="summaryName"></span></p>
+            <p><strong>Makanan:</strong> <span id="summaryFood"></span></p>
+            <p><strong>Jumlah:</strong> <span id="summaryQuantity"></span></p>
+            <p><strong>Total Harga:</strong> <span id="summaryTotal"></span></p>
+        </div>
+    </div>
+    </center>
+    <script>
+        function calculateTotal() {
+            const name = document.getElementById('name').value;
+            const food = document.getElementById('food').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+
+
+            if (!food || quantity <= 0) {
+                alert('Silakan pilih makanan dan masukkan jumlah yang valid.');
+                return;
+            }
+
+
+            const prices = {
+                'Sukocano': 35000,
+                'Sidikalang Latte': 30000,
+                'Authentic Arabica': 35000,
+                'Vanilla Latte': 30000,
+            };
+
+
+            const total = prices[food] * quantity;
+
+
+            document.getElementById('summaryName').textContent = name;
+            document.getElementById('summaryFood').textContent = food;
+            document.getElementById('summaryQuantity').textContent = quantity;
+            document.getElementById('summaryTotal').textContent = `Rp ${total.toLocaleString()}`;
+
+
+            document.getElementById('summary').style.display = 'block';
+        }
+    </script>
+ 	
+</body>
+</html>
